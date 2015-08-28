@@ -11,4 +11,5 @@ Dir.chdir("../lucene-4.10.3_src/google_ngram/") do
 
 end
 
+`mkdir ./lib`
 `cp ../lucene-4.10.3_src/build/ngram/lucene-ngram-*-SNAPSHOT.jar ./lib/`
