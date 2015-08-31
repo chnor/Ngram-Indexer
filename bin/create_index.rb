@@ -4,12 +4,13 @@ require 'thread'
 require 'zlib'
 require 'set'
 
-paths = ARGF.read.split.map &:strip
+paths = open(ARGV[0]).read.split.map &:strip
+index = ARGV[1]
 
 paths_done = open("paths_done").read.split.map(&:strip).to_set
 
 Dir.chdir(File.dirname(__FILE__)) do
-	IO.popen('java -cp "lib/*" org.apache.lucene.ngram.IndexNgramFeatures -index index_features', 'r+') do |indexer|
+	IO.popen(%[java -cp "lib/*" org.apache.lucene.ngram.IndexNgramFeatures -index #{index}], 'r+') do |indexer|
 		
 		retrieving = true
 		shutting_down = false
