@@ -623,10 +623,10 @@ public class IndexNgramFeatures {
             for (int y = 1800; y <= 2008; y++) {
               long tf_year = tf[y - 1800];
               long df_year = df[y - 1800];
-              mu_tf    += (double) y * tf_year / tf_total[y - 1800];
-              total_tf += tf_year;
-              mu_df    += (double) y * df_year / df_total[y - 1800];
-              total_df += df_year;
+              mu_tf    += y * tf_year / tf_total[y - 1800];
+              total_tf += tf_year / tf_total[y - 1800];
+              mu_df    += y * df_year / df_total[y - 1800];
+              total_df += df_year / df_total[y - 1800];
 
               // if (tf_year != 0) {
               //   doc.add(new StoredField("tf_" + y, tf_year));
@@ -642,8 +642,8 @@ public class IndexNgramFeatures {
             for (int y = 1800; y <= 2008; y++) {
               long tf_year = tf[y - 1800];
               long df_year = df[y - 1800];
-              sigma_tf += (double) tf_year * (y - mu_tf) * (y - mu_tf) / tf_total[y - 1800];
-              sigma_df += (double) df_year * (y - mu_df) * (y - mu_df) / df_total[y - 1800];
+              sigma_tf += tf_year * (y - mu_tf) * (y - mu_tf) / tf_total[y - 1800];
+              sigma_df += df_year * (y - mu_df) * (y - mu_df) / df_total[y - 1800];
             }
 
             sigma_tf /= total_tf;
